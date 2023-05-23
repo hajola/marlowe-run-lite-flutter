@@ -1,0 +1,2 @@
+- Going from marlowe contract on playground to Marlowe run
+    - Idea: use link
