@@ -68,7 +68,7 @@ class AppRouter extends Bloc<AppEvent, AppState> {
       GoRoute(
         path: '/details',
         builder: (BuildContext context, GoRouterState state) {
-          return const ContractDetailsScreen();
+          return ContractDetailsScreen();
         },
       ),
       GoRoute(
