@@ -56,7 +56,7 @@ class AppRouter extends Bloc<AppEvent, AppState> {
       GoRoute(
         path: '/wallet',
         builder: (BuildContext context, GoRouterState state) {
-          return WalletSelectScreen();
+          return ContractUploadScreen();
         },
       ),
       GoRoute(

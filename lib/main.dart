@@ -4,8 +4,10 @@ import 'package:marlowe_run/home.dart';
 import 'package:marlowe_run/marlowe-cubit/marlowe_cubit.dart';
 import 'package:marlowe_run/marlowe_observer.dart';
 import 'package:marlowe_run/routes.dart';
+import 'package:marlowe_run/runtime_repository.dart';
 import 'package:marlowe_run/settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marlowe_run/upload-cubit/upload_cubit.dart';
 import 'package:marlowe_run/wallet-cubit/wallet_cubit.dart';
 
 import 'authentication_repository.dart';
@@ -14,13 +16,21 @@ import 'bloc/app_bloc.dart';
 void main() {
   Bloc.observer = const MarloweObserver();
   final AuthenticationRepository authRepo = AuthenticationRepository();
-  runApp(MyApp(authenticationRepository: authRepo));
+  final RuntimeRepository runRepo = RuntimeRepository();
+  runApp(MyApp(
+    authenticationRepository: authRepo,
+    runtimeRepository: runRepo,
+  ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key, required this.authenticationRepository});
+  const MyApp(
+      {super.key,
+      required this.authenticationRepository,
+      required this.runtimeRepository});
 
   final AuthenticationRepository authenticationRepository;
+  final RuntimeRepository runtimeRepository;
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -55,6 +65,9 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider<AppRouter>(
             create: (context) => AppRouter(appbloc),
+          ),
+          BlocProvider<UploadCubit>(
+            create: (context) => UploadCubit(widget.runtimeRepository),
           ),
         ],
         child: Builder(
