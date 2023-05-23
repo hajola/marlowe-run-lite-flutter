@@ -36,7 +36,7 @@ class _MarloweSCPickerState extends State<MarloweSCPicker> {
         if (state.status == MarloweStatus.unloaded) {
           return TextButton.icon(
             icon: const Icon(Icons.file_upload),
-            label: const Text('Upload Marlowe Smart Contract (.json)'),
+            label: const Text('Upload Contract'),
             onPressed: () => _pickFiles(),
           );
         } else {

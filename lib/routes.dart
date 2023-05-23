@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:marlowe_run/screens/contract-create/contract_create_screen.dart';
 import 'package:marlowe_run/screens/contract-details/contract_details_screen.dart';
 import 'package:marlowe_run/screens/contract-run/contract_run_screen.dart';
 import 'package:marlowe_run/screens/contract-upload/contract_upload_screen.dart';
@@ -35,7 +34,7 @@ class AppRouter extends Bloc<AppEvent, AppState> {
       prevAuthState = appBloc.state;
       if (appBloc.state.status == AppStatus.authenticated) {
         debugPrint('Wallet connexted');
-        return '/contractupload';
+        return '/upload';
       } else if (appBloc.state.status == AppStatus.unauthenticated) {
         debugPrint('Wallet disconnected');
         return '/wallet';
@@ -63,13 +62,7 @@ class AppRouter extends Bloc<AppEvent, AppState> {
       GoRoute(
         path: '/upload',
         builder: (BuildContext context, GoRouterState state) {
-          return const ContractUploadScreen();
-        },
-      ),
-      GoRoute(
-        path: '/create',
-        builder: (BuildContext context, GoRouterState state) {
-          return const ContractCreateScreen();
+          return ContractUploadScreen();
         },
       ),
       GoRoute(
