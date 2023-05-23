@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marlowe_run/home.dart';
 import 'package:marlowe_run/marlowe-cubit/marlowe_cubit.dart';
 import 'package:marlowe_run/marlowe_observer.dart';
+import 'package:marlowe_run/screens/wallet-select/wallet_select_screen.dart';
 import 'package:marlowe_run/settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marlowe_run/wallet-cubit/wallet_cubit.dart';
@@ -66,6 +67,8 @@ class _MainPageState extends State<MainPage> {
     const MarloweDestination('Home', Icon(Icons.home), Icon(Icons.home)),
     const MarloweDestination(
         'Settings', Icon(Icons.settings), Icon(Icons.settings)),
+    const MarloweDestination(
+        'Wallet Select', Icon(Icons.wallet), Icon(Icons.wallet)),
   ];
 
   @override
@@ -77,6 +80,9 @@ class _MainPageState extends State<MainPage> {
         break;
       case 1:
         page = const SettingsPage();
+        break;
+      case 2:
+        page = WalletSelectScreen();
         break;
       default:
         throw UnimplementedError('no widget for $screenIndex');
