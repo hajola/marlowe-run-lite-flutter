@@ -79,7 +79,7 @@ class _SkeyFilePickerState extends State<SkeyFilePicker> {
         type: _pickingType,
         allowMultiple: false,
         onFileLoading: (FilePickerStatus status) => logger.i(status),
-        allowedExtensions: ['pdf', 'txt'],
+        allowedExtensions: ['json'],
         dialogTitle: 'Pick a Skey file',
         lockParentWindow: _lockParentWindow,
       ))

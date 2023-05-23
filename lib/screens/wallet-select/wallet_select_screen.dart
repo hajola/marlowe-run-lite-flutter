@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marlowe_run/components/skey_filepicker.dart';
 import '../../marlowe-cubit/marlowe_cubit.dart';
@@ -69,6 +70,7 @@ class WalletSelectScreen extends StatelessWidget {
                     context
                         .read<MarloweCubit>()
                         .storeWalletAddress(walletAddressController.text);
+                    context.go('/upload');
                   },
                 ),
               ),
