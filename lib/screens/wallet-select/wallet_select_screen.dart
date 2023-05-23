@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marlowe_run/components/skey_filepicker.dart';
+import '../../marlowe-cubit/marlowe_cubit.dart';
 
 class WalletSelectScreen extends StatelessWidget {
   final TextEditingController walletAddressController = TextEditingController();
@@ -8,7 +11,7 @@ class WalletSelectScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -47,21 +50,7 @@ class WalletSelectScreen extends StatelessWidget {
               Container(
                 height: 50,
                 width: double.infinity,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    side: BorderSide(color: Colors.purple, width: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                  ),
-                  child: Text('Upload', style: TextStyle(color: Colors.purple)),
-                  onPressed: () {
-                    // implement your file upload functionality here
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Upload Signing Key Pressed')),
-                    );
-                  },
-                ),
+                child: const SkeyFilePicker(),
               ),
               SizedBox(height: 20),
               Container(
@@ -76,7 +65,11 @@ class WalletSelectScreen extends StatelessWidget {
                     ),
                   ),
                   child: Text('Connect wallet'),
-                  onPressed: () {},
+                  onPressed: () {
+                    context
+                        .read<MarloweCubit>()
+                        .storeWalletAddress(walletAddressController.text);
+                  },
                 ),
               ),
               SizedBox(height: 10),
