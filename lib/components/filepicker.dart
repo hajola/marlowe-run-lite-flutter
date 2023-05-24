@@ -35,6 +35,13 @@ class _MarloweSCPickerState extends State<MarloweSCPicker> {
       builder: (context, state) {
         if (state.status == MarloweStatus.unloaded) {
           return TextButton.icon(
+            style: TextButton.styleFrom(
+              side: BorderSide(
+                  color: Theme.of(context).colorScheme.primary, width: 2),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+              ),
+            ),
             icon: const Icon(Icons.file_upload),
             label: const Text('Upload Contract'),
             onPressed: () => _pickFiles(),
@@ -53,6 +60,13 @@ class _MarloweSCPickerState extends State<MarloweSCPicker> {
                 ),
                 TextButton.icon(
                   icon: const Icon(Icons.file_upload),
+                  style: TextButton.styleFrom(
+                    side: BorderSide(
+                        color: Theme.of(context).colorScheme.primary, width: 2),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    ),
+                  ),
                   label: const Text(
                     'Change SC',
                     textAlign: TextAlign.center,

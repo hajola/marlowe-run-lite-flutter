@@ -77,9 +77,9 @@ class _MyAppState extends State<MyApp> {
               routerConfig: router,
               title: 'Marlowe Run',
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(
-                    seedColor: const Color(0xff511CF7),
-                    primary: const Color(0xff511CF7)),
+                colorScheme: ColorScheme.light(
+                    primary: const Color(0xff511CF7),
+                    background: const Color(0xffF8F8FF)),
                 useMaterial3: true,
               ),
             );

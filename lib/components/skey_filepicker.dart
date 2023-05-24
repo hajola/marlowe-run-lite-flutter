@@ -36,12 +36,14 @@ class _SkeyFilePickerState extends State<SkeyFilePicker> {
         if (state.status == MarloweStatus.unloaded) {
           return TextButton(
             style: TextButton.styleFrom(
-              side: const BorderSide(color: Colors.purple, width: 2),
+              side: BorderSide(
+                  color: Theme.of(context).colorScheme.primary, width: 2),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),
             ),
-            child: const Text('Upload', style: TextStyle(color: Colors.purple)),
+            child: Text('Upload',
+                style: TextStyle(color: Theme.of(context).colorScheme.primary)),
             onPressed: () => _pickFiles(),
           );
         } else {

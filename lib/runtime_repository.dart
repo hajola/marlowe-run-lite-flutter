@@ -19,9 +19,11 @@ class RuntimeRepository {
     printer: PrettyPrinter(),
   );
 
-  /// returns contractID
+  /// returns contractURL
   Future<String> createContract(
-      {required String scJSON, required String address}) async {
+      {required String scJSON,
+      required String address,
+      required Function updateLoadingMessage}) async {
     try {
       Map<String, String> headers = {
         'Content-Type': 'application/json',
@@ -42,6 +44,8 @@ class RuntimeRepository {
       String type = res['resource']['txBody']['type'];
       String contractURL = res['links']['contract'];
 
+      updateLoadingMessage(message: "Signing");
+
       //SIGNING
       Map<String, String> headers_signing = {
         'Accept': 'application/json',
@@ -57,6 +61,8 @@ class RuntimeRepository {
 
       dynamic res_sign = jsonDecode(response_signing.body);
       dynamic tx = res_sign['tx'];
+
+      updateLoadingMessage(message: "Submitting");
       // submiting
       Map<String, String> headers_submit = {
         'Content-Type': 'application/json',
@@ -73,14 +79,26 @@ class RuntimeRepository {
                 },
               ));
 
+      updateLoadingMessage(message: "Almost done");
+
+      await Future.delayed(Duration(milliseconds: 500));
 //      var response_submit =
       //        await http.put(url_submit, body: msg_submit, headers: headers_submit);
 
       logger.i(response_submit);
-      return contractId;
+      return contractURL;
     } catch (e) {
       logger.e(e);
       throw Exception('some error or the other');
     }
+  }
+
+  Future<dynamic> getContractDetails(String? contractURL) async {
+    dynamic response_contractDetails = await _dio.get(
+      'http://services.marlowe.run:13780/$contractURL',
+    );
+    dynamic resource = response_contractDetails.data['resource'];
+    logger.i(resource);
+    return resource;
   }
 }
